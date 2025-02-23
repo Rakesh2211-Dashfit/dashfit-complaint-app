@@ -1,0 +1,57 @@
+::ng-deep .custom-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white !important;
+  height: 56px !important;
+  box-shadow: none;
+  border-bottom: 1px solid #ccc;
+  display: flex !important;
+  align-items: center !important;  
+  padding: 0 16px;
+}
+
+::ng-deep .brand-logo {
+  height: 32px; /* Adjust logo size */
+}
+
+.example-icon {
+  padding: 0 14px;
+  font-size: 15px;
+  width: 10em;
+  margin-right: 30px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.span-role{
+  margin-left: 10px;
+  font-size: 12px; 
+  font-weight: 100;
+  color: #15151566;
+}
+
+.nav-buttons button {
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.mobile-menu-button {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  .span-role {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .nav-buttons {
+    display: none;
+  }
+}

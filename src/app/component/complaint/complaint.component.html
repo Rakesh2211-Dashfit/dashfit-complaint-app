@@ -1,0 +1,85 @@
+<div class="complaint-container">
+  <h2>Log Your Complaint</h2>
+  <form [formGroup]="complaintForm" (ngSubmit)="submitComplaint()">
+    <mat-card>
+      <mat-card-content>
+        <div class="container" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+          <div fxLayout="row wrap" fxLayoutGap="10px">
+            <div fxFlex="100" fxFlex.md="60">
+              <h1>{{gymDetailsResponse?.GymName}}</h1>
+              <button mat-button class="btn"><mat-icon>call</mat-icon>{{gymDetailsResponse?.MobileNo}}</button>
+              <button mat-button class="btn" (click)="openUrl()"><mat-icon>email</mat-icon>
+                {{gymDetailsResponse?.EmailId}}</button>
+
+              <mat-divider></mat-divider>
+              <br>
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" required>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Mobile Number</mat-label>
+                <input matInput formControlName="mobile" type="tel" required>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Complaint Type</mat-label>
+                <mat-select formControlName="complaintType">
+                  <mat-option [value]="-1">-- Select Complaint Type --</mat-option>
+                  <mat-option *ngFor="let complaint of complaintTypes" [value]="complaint.Id">
+                    {{ complaint.TypeName }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="complaintForm.get('complaintType')?.hasError('required')">State Name is
+                  required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Complaint Description</mat-label>
+                <textarea matInput formControlName="description" rows="3" required></textarea>
+              </mat-form-field>
+
+              <div class="upload-container">
+                <input type="file" multiple (change)="onFileSelected($event)" #fileInput hidden>
+
+                <button mat-button class="pencil-btn" (click)="fileInput.click()">
+                  <mat-icon>attach_file</mat-icon> Upload photo's (optional)
+                </button>
+
+                <div *ngIf="selectedFiles.length > 0">
+                  <ul>
+                    <li *ngFor="let file of selectedFiles; let i = index">
+                      <mat-icon>insert_drive_file</mat-icon>
+                      {{ file.name }} ({{ file.size / 1000 }} KB)
+
+                      <!-- Remove file button -->
+                      <button mat-icon-button color="warn" (click)="removeFile(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <button mat-raised-button color="primary" type="submit">Submit Complaint</button>
+  </form>
+</div>
+
+<ng-template #ComplaintPopup>
+  <h2 mat-dialog-title>Complaint Status</h2>
+  <button mat-icon-button class="close-button" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-dialog-content>
+    <div class="dialog-container">
+      <div fxLayout="row" fxLayoutGap="10px">
+       Success
+      </div>     
+    </div>
+  </mat-dialog-content>
+</ng-template>

@@ -31,8 +31,8 @@ export class ComplaintComponent implements OnInit {
   selectedFiles: File[] = [];
   uploading = false;
 
-  constructor(private fb: FormBuilder, 
-    private complaintService: ComplaintService, 
+  constructor(private fb: FormBuilder,
+    private complaintService: ComplaintService,
     private route: ActivatedRoute,
     private http: HttpClient,
     public dialog: MatDialog) {
@@ -48,17 +48,17 @@ export class ComplaintComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.QrUniqueId = params['id']; // Get "id" from route
     });
-    //this.getComplaintType();
-    //this.FetchGymDetails();
-    this.loaddata();
+    this.getComplaintType();
+    this.FetchGymDetails();
+    //this.loaddata();
 
-  } 
+  }
 
   submitComplaint() {
     if (this.complaintForm.valid) {
-      const complaintData = this.complaintForm.value;     
-      
-      
+      const complaintData = this.complaintForm.value;
+
+
       alert('Complaint Submitted Successfully! Ticket ID: ' + Math.floor(1000 + Math.random() * 9000));
       this.complaintForm.reset();
     }
@@ -109,19 +109,19 @@ export class ComplaintComponent implements OnInit {
 
   onFileSelected(event: any) {
     const files: FileList = event.target.files;
-  
+
     if (files.length > 0) {
       // Convert FileList to an array and append to existing files
       this.selectedFiles = [...this.selectedFiles, ...Array.from(files)];
-      
+
       // Update form control
       this.uploadForm.patchValue({ files: this.selectedFiles });
     }
-  
+
     // Reset input field to allow selecting the same file again
     event.target.value = '';
   }
-  
+
 
   removeFile(index: number) {
     this.selectedFiles.splice(index, 1);

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { ComplaintTypes, GymDetailsResponse } from '../_model/complaint.model';
+import { ApiResponse, ComplaintTypes, GymDetailsResponse } from '../_model/complaint.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,6 @@ export class ComplaintService {
   }
 
   FetchGymDetails(QrUniqueId : string){
-    return this.http.get<GymDetailsResponse>(this.baseUrl + 'gym/api/v1/Gym/FetchGymDetails?' + QrUniqueId);
+    return this.http.get<ApiResponse<GymDetailsResponse>>(this.baseUrl + 'gym/api/v1/Gym/FetchGymDetails?' + QrUniqueId);
   }
 }

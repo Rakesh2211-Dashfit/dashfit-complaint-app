@@ -41,7 +41,7 @@
               </mat-form-field>
 
               <div class="upload-container">
-                <input type="file" multiple (change)="onFileSelected($event)" #fileInput hidden>
+                <input type="file" multiple (change)="onFileSelected($event)"  accept=".png, .jpeg, .jpg" #fileInput hidden>
 
                 <button mat-button class="pencil-btn" (click)="fileInput.click()">
                   <mat-icon>attach_file</mat-icon> Upload photo's (optional)

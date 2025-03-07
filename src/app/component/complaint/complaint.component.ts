@@ -109,15 +109,21 @@ export class ComplaintComponent implements OnInit {
 
   onFileSelected(event: any) {
     const files: FileList = event.target.files;
-  
+    
     if (files.length > 0) {
       // Convert FileList to an array and append to existing files
-      this.selectedFiles = [...this.selectedFiles, ...Array.from(files)];
+      this.selectedFiles = [...this.selectedFiles, ...Array.from(files).filter(file => {
+        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        return allowedTypes.includes(file.type);
+      }).map((file, index) => {
+        const year = new Date().getFullYear();
+        return new File([file], `img_${year}_${index}.${file.name.split('.').pop()}`, { type: file.type });
+      })];
       
       // Update form control
-      this.uploadForm.patchValue({ files: this.selectedFiles });
+      this.complaintForm.patchValue({ files: this.selectedFiles });
     }
-  
+
     // Reset input field to allow selecting the same file again
     event.target.value = '';
   }

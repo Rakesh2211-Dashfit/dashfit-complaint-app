@@ -10,3 +10,9 @@ export interface GymDetailsResponse {
     EmailId: string;
     MobileNo: string;
 }
+
+export interface ApiResponse<T> {
+    StatusCode: number;
+    Message: string;
+    Data: T;
+  }
